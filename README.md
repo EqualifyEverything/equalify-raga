@@ -2,17 +2,17 @@
 
 # Chrome Extension (MV3) Boilerplate with React 18 and Webpack 5
 
-[![npm](https://img.shields.io/npm/v/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
-[![npm-download](https://img.shields.io/npm/dw/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
-[![npm](https://img.shields.io/npm/dm/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
+[![npm](https://img.shields.io/npm/v/equalify-chrome-extension)](https://www.npmjs.com/package/equalify-chrome-extension)
+[![npm-download](https://img.shields.io/npm/dw/equalify-chrome-extension)](https://www.npmjs.com/package/equalify-chrome-extension)
+[![npm](https://img.shields.io/npm/dm/equalify-chrome-extension)](https://www.npmjs.com/package/equalify-chrome-extension)
 
 ## Announcements
 
 - Recently updated from **[React](https://reactjs.org)** ~~17~~ to **18**!
 - **_This boilerplate adopts [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)!_**
-  - For V2 users, please check out the [manifest-v2](https://github.com/lxieyang/chrome-extension-boilerplate-react/tree/manifest-v2) branch, or use version [3.x](https://www.npmjs.com/package/chrome-extension-boilerplate-react/v/3.3.0).
+  - For V2 users, please check out the [manifest-v2](https://github.com/lxieyang/equalify-chrome-extension/tree/manifest-v2) branch, or use version [3.x](https://www.npmjs.com/package/equalify-chrome-extension/v/3.3.0).
   - Check out the [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/).
-- Recently added [devtools](https://developer.chrome.com/docs/extensions/mv3/devtools/) Support! Thanks [GeekaholicLin](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/17)!
+- Recently added [devtools](https://developer.chrome.com/docs/extensions/mv3/devtools/) Support! Thanks [GeekaholicLin](https://github.com/lxieyang/equalify-chrome-extension/issues/17)!
 - Recently updated from **[Webpack Dev Server](https://webpack.js.org/configuration/dev-server/)** ~~3.x~~ to **4.x** and **[Webpack](https://webpack.js.org/)** ~~4~~ to **5**!
 - Recently added [TypeScript](https://www.typescriptlang.org/) Support!
 
@@ -107,7 +107,7 @@ and on your `src/manifest.json`:
 
 ## Intelligent Code Completion
 
-Thanks to [@hudidit](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/4)'s kind suggestions, this boilerplate supports chrome-specific intelligent code completion using [@types/chrome](https://www.npmjs.com/package/@types/chrome).
+Thanks to [@hudidit](https://github.com/lxieyang/equalify-chrome-extension/issues/4)'s kind suggestions, this boilerplate supports chrome-specific intelligent code completion using [@types/chrome](https://www.npmjs.com/package/@types/chrome).
 
 ## Packing
 
