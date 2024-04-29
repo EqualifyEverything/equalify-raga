@@ -3,12 +3,22 @@
   "name": "Equalify Chrome Extension",
   "description": "A chrome extension to send accessibility issues to Equalify",
   "options_page": "options.html",
-  "background": { "service_worker": "background.bundle.js" },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "desktopCapture",
+    "activeTab",
+    "host_permissions"
+  ],
+  "host_permissions": ["http://localhost:3001/*"],
+  "background": { "service_worker": "background.bundle.js", "type": "module" },
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"
   },
   "icons": {
+    "16": "icon-16.png",
+    "34": "icon-34.png",
     "128": "icon-128.png"
   },
   "content_scripts": [
@@ -24,5 +34,28 @@
       "resources": ["content.styles.css", "icon-128.png", "icon-34.png"],
       "matches": []
     }
-  ]
+  ],
+  "commands": {
+    "screenshot-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+G",
+        "mac": "MacCtrl+Shift+G"
+      },
+      "description": "Grab a screenshot of the current tab and send it to Equalify"
+    },
+    "selected-element": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "MacCtrl+Shift+E"
+      },
+      "description": "Send the currently selected element to Equalify"
+    },
+    "meta-issue": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M",
+        "mac": "MacCtrl+Shift+M"
+      },
+      "description": "Send the whole page with META issues to Equalify"
+    }
+  }
 }
