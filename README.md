@@ -1,57 +1,29 @@
-<img src="src/assets/img/icon-128.png" width="64"/>
+# equalify-raga
 
-# Chrome Extension (MV3) Boilerplate with React 18 and Webpack 5
+This is the Equalify chrome-extension for sending usability issues straight to the Equalify API.
 
-[![npm](https://img.shields.io/npm/v/equalify-chrome-extension)](https://www.npmjs.com/package/equalify-chrome-extension)
-[![npm-download](https://img.shields.io/npm/dw/equalify-chrome-extension)](https://www.npmjs.com/package/equalify-chrome-extension)
-[![npm](https://img.shields.io/npm/dm/equalify-chrome-extension)](https://www.npmjs.com/package/equalify-chrome-extension)
+## table of contents
 
-## Announcements
+- [equalify-raga](#equalify-raga)
+  - [table of contents](#table-of-contents)
+  - [Structure](#structure)
+    - [dummyAPI](#dummyapi)
+  - [Setup](#setup)
+  - [Running](#running)
+  - [Updating](#updating)
+    - [Background/index.ts](#backgroundindexts)
+    - [manifest.json](#manifestjson)
+    - [Webpack config](#webpack-config)
+  - [Content Scripts](#content-scripts)
+  - [Packing](#packing)
+  - [Secrets](#secrets)
+  - [Resources:](#resources)
+    - [Original boilerplate details](#original-boilerplate-details)
+      - [Features](#features)
+    - [TypeScript](#typescript)
+    - [Webpack auto-reload and HRM](#webpack-auto-reload-and-hrm)
+    - [Intelligent Code Completion](#intelligent-code-completion)
 
-- Recently updated from **[React](https://reactjs.org)** ~~17~~ to **18**!
-- **_This boilerplate adopts [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)!_**
-  - For V2 users, please check out the [manifest-v2](https://github.com/lxieyang/equalify-chrome-extension/tree/manifest-v2) branch, or use version [3.x](https://www.npmjs.com/package/equalify-chrome-extension/v/3.3.0).
-  - Check out the [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/).
-- Recently added [devtools](https://developer.chrome.com/docs/extensions/mv3/devtools/) Support! Thanks [GeekaholicLin](https://github.com/lxieyang/equalify-chrome-extension/issues/17)!
-- Recently updated from **[Webpack Dev Server](https://webpack.js.org/configuration/dev-server/)** ~~3.x~~ to **4.x** and **[Webpack](https://webpack.js.org/)** ~~4~~ to **5**!
-- Recently added [TypeScript](https://www.typescriptlang.org/) Support!
-
-## Features
-
-This is a basic Chrome Extensions boilerplate to help you write modular and modern Javascript code, load CSS easily and [automatic reload the browser on code changes](https://webpack.github.io/docs/webpack-dev-server.html#automatic-refresh).
-
-This boilerplate is updated with:
-
-- [Chrome Extension Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)
-- [React 18](https://reactjs.org)
-- [Webpack 5](https://webpack.js.org/)
-- [Webpack Dev Server 4](https://webpack.js.org/configuration/dev-server/)
-- [React Refresh](https://www.npmjs.com/package/react-refresh)
-- [react-refresh-webpack-plugin](https://github.com/pmmmwh/react-refresh-webpack-plugin)
-- [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
-- [Prettier](https://prettier.io/)
-- [TypeScript](https://www.typescriptlang.org/)
-
-This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 18 features, Webpack 5, and Webpack Dev Server 4.
-
-Please open up an issue to nudge me to keep the npm packages up-to-date. FYI, it takes time to make different packages with different versions work together nicely.
-
-## Installing and Running
-
-### Procedures:
-
-1. Check if your [Node.js](https://nodejs.org/) version is >= **18**.
-2. Clone this repository.
-3. Change the package's `name`, `description`, and `repository` fields in `package.json`.
-4. Change the name of your extension on `src/manifest.json`.
-5. Run `npm install` to install the dependencies.
-6. Run `npm start`
-7. Load your extension on Chrome following:
-   1. Access `chrome://extensions/`
-   2. Check `Developer mode`
-   3. Click on `Load unpacked extension`
-   4. Select the `build` folder.
-8. Happy hacking.
 
 ## Structure
 
@@ -59,19 +31,47 @@ All your extension's code must be placed in the `src` folder.
 
 The boilerplate is already prepared to have a popup, an options page, a background page, and a new tab page (which replaces the new tab page of your browser). But feel free to customize these.
 
-## TypeScript
+### dummyAPI
 
-This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/pages/Options/` for example usages.
+`dummyAPI` is a dummy API for sending POST requests to instead of flooding a real end point. It uses the same `API_Constants.ts` `EqualifyIssueType`s to define the api end points.
 
-## Webpack auto-reload and HRM
+## Setup
 
-To make your workflow much more efficient this boilerplate uses the [webpack server](https://webpack.github.io/docs/webpack-dev-server.html) to development (started with `npm start`) with auto reload feature that reloads the browser automatically every time that you save some file in your editor.
-
-You can run the dev mode on other port if you want. Just specify the env var `port` like this:
-
+```bash
+npm install
 ```
-$ PORT=6002 npm run start
+
+You will need to load the chrome-extension as an unpacked chrome extension into your browser. Go to `chrome://extensions/` in Chrome. Enable `Developer Mode` and then click `Load unpacked`. Navigate to this repo and select the `build/` dir to load.
+
+## Running
+
+The easy managed way is to run the pm2 script:
+
+```bash
+pm2 start
 ```
+This will launch the dummyAPI server (and it's Typescript watcher) and the chrome-extension webpack dev server all in one go. You can peep the logs by saying `pm2 logs` at any time, or `pm2 dash` to get the HUD with all the deets.
+
+## Updating
+
+Running things under pm2 everything should automatically recompile and update. 
+
+However, some changes require clicking the reload symbol on the `chrome://extensions` page. Maybe there's a way around this? IDK! We'll find out...
+
+Known things that need a click of the reload are: 
+
+### Background/index.ts
+
+Not sure why this can't be hot reloaded. Hmm...
+
+### manifest.json
+
+If you change the manifest.json file you will need to manually reload the extension. add a hot key or change the permissions 
+
+### Webpack config
+
+If you change the webpack config make sure to `pm2 restart` since the webpack changes aren't automatically detected as a thing requiring a restart.
+
 
 ## Content Scripts
 
@@ -104,10 +104,6 @@ and on your `src/manifest.json`:
   ]
 }
 ```
-
-## Intelligent Code Completion
-
-Thanks to [@hudidit](https://github.com/lxieyang/equalify-chrome-extension/issues/4)'s kind suggestions, this boilerplate supports chrome-specific intelligent code completion using [@types/chrome](https://www.npmjs.com/package/@types/chrome).
 
 ## Packing
 
@@ -145,6 +141,50 @@ ApiCall({ key: secrets.key });
 - [Webpack documentation](https://webpack.js.org/concepts/)
 - [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
 
+
+### Original boilerplate details
+
+#### Features
+
+This is a basic Chrome Extensions boilerplate to help you write modular and modern Javascript code, load CSS easily and [automatic reload the browser on code changes](https://webpack.github.io/docs/webpack-dev-server.html#automatic-refresh).
+
+This boilerplate is updated with:
+
+- [Chrome Extension Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)
+- [React 18](https://reactjs.org)
+- [Webpack 5](https://webpack.js.org/)
+- [Webpack Dev Server 4](https://webpack.js.org/configuration/dev-server/)
+- [React Refresh](https://www.npmjs.com/package/react-refresh)
+- [react-refresh-webpack-plugin](https://github.com/pmmmwh/react-refresh-webpack-plugin)
+- [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
+- [Prettier](https://prettier.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 18 features, Webpack 5, and Webpack Dev Server 4.
+
+### TypeScript
+
+This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/pages/Options/` for example usages.
+
+### Webpack auto-reload and HRM
+
+To make your workflow much more efficient this boilerplate uses the [webpack server](https://webpack.github.io/docs/webpack-dev-server.html) to development (started with `npm start`) with auto reload feature that reloads the browser automatically every time that you save some file in your editor.
+
+You can run the dev mode on other port if you want. Just specify the env var `port` like this:
+
+```
+$ PORT=6002 npm run start
+```
+
+### Intelligent Code Completion
+
+Thanks to [@hudidit](https://github.com/lxieyang/equalify-chrome-extension/issues/4)'s kind suggestions, this boilerplate supports chrome-specific intelligent code completion using [@types/chrome](https://www.npmjs.com/package/@types/chrome).
+
+
+Please open up an issue to nudge me to keep the npm packages up-to-date. FYI, it takes time to make different packages with different versions work together nicely.
+
 ---
 
 Michael Xieyang Liu | [Website](https://lxieyang.github.io)
+
+
