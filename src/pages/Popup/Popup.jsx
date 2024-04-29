@@ -28,6 +28,11 @@ const Section = ({ title, onClick }) => {
  */
 
 const Popup = () => {
+  const issueClicked = (issueType) => {
+    console.warn(`issue clicked: ${issueType}`);
+    alert(`logging: ${issueType}`);
+  };
+
   return (
     <div className="App">
       <div className="App-content">
@@ -35,10 +40,13 @@ const Popup = () => {
           <UserHeader username={'Morgan Smith'} avatarUrl={icon} />
         </div>
         <div className="main-content">
-          <Section title="Meta Page Issue" onClick={() => alert('meta page')} />
+          <Section
+            title="Meta Page Issue"
+            onClick={() => issueClicked('meta page')}
+          />
           <Section
             title="Specific Issue"
-            onClick={() => alert('specific issue')}
+            onClick={() => issueClicked('specific issue')}
           />
         </div>
       </div>
