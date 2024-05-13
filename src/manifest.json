@@ -56,6 +56,13 @@
         "mac": "MacCtrl+Shift+M"
       },
       "description": "Send the whole page with META issues to Equalify"
+    },
+    "clear-storage": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "MacCtrl+Shift+C"
+      },
+      "description": "Clear local storage"
     }
   }
 }

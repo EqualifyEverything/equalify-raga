@@ -4,6 +4,7 @@ import {
   EqualifyIssueType,
   HttpStatus,
 } from './API_Constants';
+import { User } from './CommonTypes';
 
 // define a function that captures a screenshot of the current tab and returns a Promise that resolves a Blob
 // FIXME: move this to a utils file
@@ -31,8 +32,12 @@ export const captureScreenShot = (): Promise<Blob> => {
   });
 };
 
-const getUserID = () => {
-  return '1234';
+const getUserID = async () => {
+  // get the user object from the chrome-extension storage
+  const result = await chrome.storage.local.get(['user']);
+  const user: User = result.user;
+  // FIXME: should we allow people to submit issues anonymously?
+  return user?.id || 'anonymous';
 };
 
 const getAuthToken = () => {
@@ -49,9 +54,9 @@ const sendParametersToAPI = (
   issueType: EqualifyIssueType,
   opts: EqualifyParams
 ) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const params = {
-      userId: getUserID(),
+      userId: await getUserID(),
       ...opts,
     };
 

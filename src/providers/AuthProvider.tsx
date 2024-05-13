@@ -1,11 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  iconUrl?: string;
-};
+import { User } from '../../utils/CommonTypes';
 
 type AuthProviderState = {
   user?: User;

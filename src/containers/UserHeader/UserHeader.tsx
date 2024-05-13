@@ -18,7 +18,7 @@ const UserHeader: React.FC<UserHeaderProps> = () => {
   const login = () => {
     console.info('logging in');
     let user: User = {
-      id: '1234',
+      id: Date.now().toString(),
       name: 'John Doe',
       email: 'foo@bar.com',
     };

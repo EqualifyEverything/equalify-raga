@@ -122,8 +122,11 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 chrome.commands.onCommand.addListener(function (command) {
   console.log('Command triggered: ' + command);
 
-  if (command === 'screenshot-tab') {
-    captureScreenShot();
+  if (command === 'clear-storage') {
+    // clear the storage
+    chrome.storage.local.clear(() => {
+      console.log('Storage cleared');
+    });
   } else if (command === 'selected-element') {
     console.log('Selected element');
 
