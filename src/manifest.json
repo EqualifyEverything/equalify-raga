@@ -8,7 +8,7 @@
     "tabs",
     "desktopCapture",
     "activeTab",
-    "host_permissions"
+    "storage"
   ],
   "host_permissions": ["http://localhost:3001/*"],
   "background": { "service_worker": "background.bundle.js", "type": "module" },
