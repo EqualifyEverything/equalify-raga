@@ -1,4 +1,6 @@
 import React from 'react';
+import { User, useAuthProvider } from '../../providers/AuthProvider';
+import icon from '../../assets/img/icon-128.png';
 
 interface UserHeaderProps {
   username?: string;
@@ -7,7 +9,29 @@ interface UserHeaderProps {
 
 const AVATAR_SIZE = 50;
 
-const UserHeader: React.FC<UserHeaderProps> = ({ username, avatarUrl }) => {
+const UserHeader: React.FC<UserHeaderProps> = () => {
+  const authProviderState = useAuthProvider();
+
+  const username = authProviderState?.user?.name || 'Guest';
+  const avatarUrl = authProviderState?.user?.iconUrl || icon;
+
+  const login = () => {
+    console.info('logging in');
+    let user: User = {
+      id: '1234',
+      name: 'John Doe',
+      email: 'foo@bar.com',
+    };
+    authProviderState.setUser(user);
+  };
+
+  if (!authProviderState?.user)
+    return (
+      <div>
+        <button onClick={login}>Login or Sign up.. please</button>
+      </div>
+    );
+
   if (username && avatarUrl) {
     return (
       <div
