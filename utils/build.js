@@ -15,10 +15,18 @@ config.mode = 'production';
 
 var packageInfo = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 
+const filename = `${packageInfo.name}-${packageInfo.version}.zip`;
+const zipPath = path.join(__dirname, '../', 'zip');
+
+console.log('Creating a production build...');
+console.log('Creating a zip package...');
+console.log('Zip file:', filename);
+console.log('Zip path:', zipPath);
+
 config.plugins = (config.plugins || []).concat(
   new ZipPlugin({
-    filename: `${packageInfo.name}-${packageInfo.version}.zip`,
-    path: path.join(__dirname, '../', 'zip'),
+    filename,
+    path: zipPath,
   })
 );
 
