@@ -1,5 +1,6 @@
 import React from 'react';
-import { User, useAuthProvider } from '../../providers/AuthProvider';
+import { User } from '../../../utils/CommonTypes';
+import { useAuthProvider } from '../../providers/AuthProvider';
 import icon from '../../assets/img/icon-128.png';
 
 interface UserHeaderProps {
